@@ -131,6 +131,20 @@ validação do tipo;
 validação de data;
 acesso sem autenticação;
 acesso com token inválido.
+
+## 📌 Endpoints
+
+| Método | Endpoint | Descrição |
+|---|---|---|
+| POST | `/usuarios` | Cria um novo usuário |
+| POST | `/login` | Realiza autenticação e retorna o token JWT |
+| POST | `/transacoes` | Cria uma nova transação |
+| GET | `/transacoes` | Lista as transações do usuário autenticado |
+| PUT | `/transacoes/{id}` | Atualiza uma transação do usuário autenticado |
+| DELETE | `/transacoes/{id}` | Exclui uma transação do usuário autenticado |
+| GET | `/resumo` | Retorna o resumo financeiro |
+| GET | `/` | Retorna a resposta inicial da API |
+
 🎯 Objetivo do projeto
 
 Projeto desenvolvido para prática e demonstração de conhecimentos em desenvolvimento de APIs REST com Python, autenticação, persistência de dados, validação, segurança e documentação de APIs.
