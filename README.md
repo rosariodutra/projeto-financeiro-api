@@ -161,6 +161,24 @@ A API foi testada utilizando o Swagger UI, incluindo cenários de sucesso, valid
 | GET | `/resumo` | Retorna o resumo financeiro |
 | GET | `/` | Retorna a resposta inicial da API |
 
+## 💡 Competências demonstradas
+
+Este projeto demonstra conhecimentos práticos em:
+
+- Desenvolvimento de APIs REST com Python e FastAPI
+- Modelagem de dados com SQLAlchemy
+- Validação de dados com Pydantic
+- Autenticação e autorização utilizando JWT
+- Hash e verificação segura de senhas
+- Controle de acesso baseado no usuário autenticado
+- Implementação de operações CRUD
+- Gerenciamento de banco de dados com SQLite
+- Controle de versões de banco de dados com Alembic
+- Tratamento de exceções HTTP
+- Documentação de APIs com Swagger/OpenAPI
+- Testes de validação, autenticação e autorização
+- Versionamento de código com Git e GitHub
+
 🎯 Objetivo do projeto
 
 Projeto desenvolvido para prática e demonstração de conhecimentos em desenvolvimento de APIs REST com Python, autenticação, persistência de dados, validação, segurança e documentação de APIs.
