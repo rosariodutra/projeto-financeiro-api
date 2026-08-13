@@ -78,3 +78,172 @@ Para executar os testes:
 
 ```bash
 pytest
+```
+
+Resultado esperado:
+
+```text
+7 passed
+```
+
+---
+
+## 📖 Documentação da API
+
+Após iniciar a aplicação, a documentação interativa pode ser acessada pelo Swagger:
+
+```text
+http://127.0.0.1:8000/docs
+```
+
+Também é possível acessar a documentação OpenAPI:
+
+```text
+http://127.0.0.1:8000/redoc
+```
+
+---
+
+## ⚙️ Como executar o projeto
+
+### 1. Clonar o repositório
+
+```bash
+git clone https://github.com/rosariodutra/projeto-financeiro-api.git
+```
+
+### 2. Entrar na pasta
+
+```bash
+cd projeto-financeiro-api
+```
+
+### 3. Criar ambiente virtual
+
+```bash
+python -m venv venv
+```
+
+### 4. Ativar o ambiente virtual
+
+No Windows:
+
+```bash
+venv\Scripts\activate
+```
+
+### 5. Instalar as dependências
+
+```bash
+pip install fastapi uvicorn sqlalchemy alembic passlib bcrypt python-jose pytest httpx
+```
+
+### 6. Executar a API
+
+```bash
+uvicorn main:app --reload
+```
+
+A API estará disponível em:
+
+```text
+http://127.0.0.1:8000
+```
+
+Swagger:
+
+```text
+http://127.0.0.1:8000/docs
+```
+
+---
+
+## 🗄️ Banco de dados
+
+O projeto utiliza SQLite como banco de dados.
+
+As alterações estruturais do banco são gerenciadas utilizando Alembic.
+
+Para aplicar as migrações:
+
+```bash
+alembic upgrade head
+```
+
+---
+
+## 🧪 Estrutura dos testes
+
+Os testes estão organizados na pasta:
+
+```text
+tests/
+├── conftest.py
+├── test_transacoes.py
+└── test_validacoes.py
+```
+
+O ambiente de testes utiliza um banco SQLite separado em memória, evitando alterações no banco de dados utilizado pela aplicação.
+
+---
+
+## 📂 Estrutura do projeto
+
+```text
+projeto-financeiro-api/
+│
+├── alembic/
+│   └── versions/
+│
+├── tests/
+│   ├── conftest.py
+│   ├── test_transacoes.py
+│   └── test_validacoes.py
+│
+├── .gitignore
+├── alembic.ini
+├── database.py
+├── main.py
+├── models.py
+├── schemas.py
+├── security.py
+├── pytest.ini
+└── README.md
+```
+
+---
+
+## 💡 Competências demonstradas
+
+Este projeto demonstra conhecimentos práticos em:
+
+- Desenvolvimento de APIs REST com Python e FastAPI
+- Modelagem de dados com SQLAlchemy
+- Validação de dados com Pydantic
+- Autenticação e autorização utilizando JWT
+- Hash e verificação segura de senhas
+- Controle de acesso baseado no usuário autenticado
+- Implementação de operações CRUD
+- Gerenciamento de banco de dados com SQLite
+- Controle de versões de banco de dados com Alembic
+- Tratamento de exceções HTTP
+- Documentação de APIs com Swagger/OpenAPI
+- Testes automatizados com Pytest
+- Controle de qualidade e validação de regras de negócio
+- Versionamento de código com Git e GitHub
+
+---
+
+## 🎯 Objetivo do projeto
+
+Projeto desenvolvido para consolidar conhecimentos em desenvolvimento backend com Python, APIs REST, bancos de dados, autenticação, segurança, testes automatizados e controle de versão.
+
+O projeto também faz parte do portfólio profissional para demonstração de conhecimentos práticos em desenvolvimento de software.
+
+---
+
+## 👩‍💻 Autora
+
+**Rosário Dutra**
+
+Projeto desenvolvido para estudos e portfólio profissional.
