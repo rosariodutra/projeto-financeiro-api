@@ -281,3 +281,53 @@ def test_resumo_financeiro_isolado_por_usuario(client, db):
     assert dados["total_entradas"] == 100
     assert dados["total_saidas"] == 30
     assert dados["saldo"] == 70
+
+def test_fluxo_login_e_criacao_de_transacao(client, db):
+    usuario = Usuario(
+        nome="Usuario Fluxo",
+        email="fluxo@teste.com",
+        senha=criar_hash_senha("123456")
+    )
+
+    db.add(usuario)
+    db.commit()
+    db.refresh(usuario)
+
+    login = client.post(
+        "/login",
+        json={
+            "email": "fluxo@teste.com",
+            "senha": "123456"
+        }
+    )
+
+    assert login.status_code == 200
+
+    dados_login = login.json()
+
+    assert "access_token" in dados_login
+    assert dados_login["token_type"] == "bearer"
+
+    token = dados_login["access_token"]
+
+    response = client.post(
+        "/transacoes",
+        headers={
+            "Authorization": f"Bearer {token}"
+        },
+        json={
+            "descricao": "Salário",
+            "valor": 3000,
+            "tipo": "entrada",
+            "data": "2026-08-13"
+        }
+    )
+
+    assert response.status_code == 201
+
+    dados_transacao = response.json()
+
+    assert dados_transacao["descricao"] == "Salário"
+    assert dados_transacao["valor"] == 3000
+    assert dados_transacao["tipo"] == "entrada"
+    
