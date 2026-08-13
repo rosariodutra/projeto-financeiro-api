@@ -93,15 +93,15 @@ def resumo_financeiro(
     total_entradas = db.query(
         func.sum(models.Transacao.valor)
     ).filter(
-        models.Transacao.tipo == "entrada",
-        models.Transacao.usuario_id == usuario_id
+        models.Transacao.usuario_id == usuario_id,
+        models.Transacao.tipo == "entrada"
     ).scalar()
 
     total_saidas = db.query(
         func.sum(models.Transacao.valor)
     ).filter(
-        models.Transacao.tipo == "saida",
-        models.Transacao.usuario_id == usuario_id
+        models.Transacao.usuario_id == usuario_id,
+        models.Transacao.tipo == "saida"
     ).scalar()
 
     total_entradas = total_entradas or 0

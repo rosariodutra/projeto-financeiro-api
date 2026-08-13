@@ -211,3 +211,73 @@ def test_resumo_mostra_apenas_transacoes_do_usuario(
     assert dados["total_entradas"] == 100
     assert dados["total_saidas"] == 0
     assert dados["saldo"] == 100
+
+def test_resumo_financeiro_isolado_por_usuario(client, db):
+    usuario1 = Usuario(
+        nome="Usuario Resumo 1",
+        email="resumo1@teste.com",
+        senha=criar_hash_senha("123456")
+    )
+
+    usuario2 = Usuario(
+        nome="Usuario Resumo 2",
+        email="resumo2@teste.com",
+        senha=criar_hash_senha("123456")
+    )
+
+    db.add_all([usuario1, usuario2])
+    db.commit()
+
+    db.refresh(usuario1)
+    db.refresh(usuario2)
+
+    transacao1 = Transacao(
+        descricao="Entrada usuario 1",
+        valor=100,
+        tipo="entrada",
+        usuario_id=usuario1.id
+    )
+
+    transacao2 = Transacao(
+        descricao="Saida usuario 1",
+        valor=30,
+        tipo="saida",
+        usuario_id=usuario1.id
+    )
+
+    transacao3 = Transacao(
+        descricao="Entrada usuario 2",
+        valor=500,
+        tipo="entrada",
+        usuario_id=usuario2.id
+    )
+
+    db.add_all([transacao1, transacao2, transacao3])
+    db.commit()
+
+    login = client.post(
+        "/login",
+        json={
+            "email": "resumo1@teste.com",
+            "senha": "123456"
+        }
+    )
+
+    assert login.status_code == 200
+
+    token = login.json()["access_token"]
+
+    response = client.get(
+        "/resumo",
+        headers={
+            "Authorization": f"Bearer {token}"
+        }
+    )
+
+    assert response.status_code == 200
+
+    dados = response.json()
+
+    assert dados["total_entradas"] == 100
+    assert dados["total_saidas"] == 30
+    assert dados["saldo"] == 70
