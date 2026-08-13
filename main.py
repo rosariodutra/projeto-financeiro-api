@@ -88,16 +88,20 @@ def resumo_financeiro(
     db: Session = Depends(get_db),
     usuario_atual: dict = Depends(obter_usuario_atual)
 ):
+    usuario_id = int(usuario_atual["sub"])
+
     total_entradas = db.query(
         func.sum(models.Transacao.valor)
     ).filter(
-        models.Transacao.tipo == "entrada"
+        models.Transacao.tipo == "entrada",
+        models.Transacao.usuario_id == usuario_id
     ).scalar()
 
     total_saidas = db.query(
         func.sum(models.Transacao.valor)
     ).filter(
-        models.Transacao.tipo == "saida"
+        models.Transacao.tipo == "saida",
+        models.Transacao.usuario_id == usuario_id
     ).scalar()
 
     total_entradas = total_entradas or 0
