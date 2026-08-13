@@ -113,24 +113,40 @@ O projeto utiliza SQLite como banco de dados e Alembic para controle de migraç�
 
 O arquivo do banco de dados local não é versionado no GitHub, conforme definido no .gitignore.
 
-🧪 Testes realizados
+## 🧪 Testes realizados
 
-Durante o desenvolvimento foram realizados testes utilizando o Swagger, incluindo:
+A API foi testada utilizando o Swagger UI, incluindo cenários de sucesso, validação, autenticação e controle de acesso.
 
-criação de usuário;
-autenticação;
-geração e validação de JWT;
-criação de transações;
-consulta de transações;
-atualização de transações;
-exclusão de transações;
-tentativa de acesso entre usuários;
-validação de valores;
-validação de descrição;
-validação do tipo;
-validação de data;
-acesso sem autenticação;
-acesso com token inválido.
+### Validação de dados
+
+| Cenário | Resultado |
+|---|---:|
+| Valor igual a `0` | 422 ✅ |
+| Valor negativo | 422 ✅ |
+| Descrição vazia | 422 ✅ |
+| Tipo de transação inválido | 422 ✅ |
+| Data em formato inválido | 422 ✅ |
+
+### Autenticação e autorização
+
+| Cenário | Resultado |
+|---|---:|
+| Requisição sem token JWT | 401 ✅ |
+| Token JWT inválido | 401 ✅ |
+| Usuário acessando transação de outro usuário | 404 ✅ |
+| Usuário tentando atualizar transação de outro usuário | 404 ✅ |
+| Usuário tentando excluir transação de outro usuário | 404 ✅ |
+| Usuário consultando suas próprias transações | 200 ✅ |
+
+### Operações da API
+
+| Operação | Resultado |
+|---|---:|
+| Criação de usuário | 201 ✅ |
+| Criação de transação | 201 ✅ |
+| Listagem de transações | 200 ✅ |
+| Atualização autorizada | 200 ✅ |
+| Exclusão autorizada | 200 ✅ |
 
 ## 📌 Endpoints
 
