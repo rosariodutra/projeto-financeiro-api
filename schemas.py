@@ -1,7 +1,7 @@
 from typing import Literal
 from datetime import date
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, ConfigDict
 
 
 class TransacaoBase(BaseModel):
@@ -22,8 +22,7 @@ class TransacaoUpdate(TransacaoBase):
 class TransacaoResponse(TransacaoBase):
     id: int
 
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
 
 
 class UsuarioCreate(BaseModel):
@@ -37,5 +36,4 @@ class UsuarioResponse(BaseModel):
     nome: str
     email: str
 
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
